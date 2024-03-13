@@ -47,24 +47,28 @@ booksterCPSWDomReady(() => {
   const checkOut = form.querySelector('.js-bookster-cpsw-check-out');
 
   checkIn.addEventListener('duetChange', () => {
-    let checkInObj = createDateObj(checkIn.value),
-    checkOutObj = createDateObj(checkOut.value);
+    let checkInObj = new Date(checkIn.value),
+    checkOutObj = new Date(checkOut.value);
 
     if(checkInObj >= checkOutObj) {
       let newCheckInDay = checkOutObj.getDate() - 2;
       checkInObj.setDate(newCheckInDay);
-      checkIn.value = `${checkInObj.getDate()}-${checkInObj.getMonth() + 1}-${checkInObj.getFullYear()}`;
+      let month = checkInObj.getMonth() + 1;
+      if(month < 10) month = '0'+month;
+      checkIn.value = `${checkInObj.getFullYear()}-${month}-${checkInObj.getDate()}`;
     }
   });
 
   checkOut.addEventListener('duetChange', () => {
-    let checkInObj = createDateObj(checkIn.value),
-    checkOutObj = createDateObj(checkOut.value);
+    let checkInObj = new Date(checkIn.value),
+    checkOutObj = new Date(checkOut.value);
 
     if(checkOutObj <= checkInObj) {
       let newCheckOutDay = checkInObj.getDate() + 2;
       checkOutObj.setDate(newCheckOutDay);
-      checkOut.value = `${checkOutObj.getDate()}-${checkOutObj.getMonth() + 1}-${checkOutObj.getFullYear()}`;
+      let month = checkInObj.getMonth() + 1;
+      if(month < 10) month = '0'+month;
+      checkOut.value = `${checkOutObj.getFullYear()}-${month}-${checkOutObj.getDate()}`;
     }
   });
 
@@ -79,11 +83,4 @@ booksterCPSWDomReady(() => {
 
     window.location = 'https://booking.booksterhq.com/find-and-book/availability/'+checkIn.value+'-until-'+checkOut.value+'-for-'+party.value+'/sub/'+subID.value;
   });
-
-  function createDateObj(date) {
-    const matches = date.match(DATE_FORMAT_UK);
-    if(matches) {
-      return new Date(matches[3]+'-'+matches[2]+'-'+matches[1])
-    }
-  }
 });
