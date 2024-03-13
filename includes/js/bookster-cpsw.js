@@ -46,6 +46,14 @@ booksterCPSWDomReady(() => {
   const checkIn = form.querySelector('.js-bookster-cpsw-check-in');
   const checkOut = form.querySelector('.js-bookster-cpsw-check-out');
 
+  checkIn.addEventListener('click', () => {
+    checkIn.show();
+  });
+
+  checkOut.addEventListener('click', () => {
+    checkOut.show();
+  });
+
   checkIn.addEventListener('duetChange', () => {
     let checkInObj = new Date(checkIn.value),
     checkOutObj = new Date(checkOut.value);
