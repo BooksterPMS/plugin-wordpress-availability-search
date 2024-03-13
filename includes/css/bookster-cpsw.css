@@ -1,0 +1,45 @@
+.bookster-cpsw-form-container {
+  box-sizing: border-box;
+  padding: 30px 30px 10px 30px;
+  background: #fff;
+  margin: 10px 0;
+}
+
+.bookster-cpsw-form-container #bookster-cpsw-form h5 {
+  text-transform: uppercase;
+  margin: 0 0 10px;
+  font-size: 1em;
+  font-weight: bold;
+}
+
+.bookster-cpsw-form-container #bookster-cpsw-form .bookster-cpsw-form-group {
+  margin-bottom: 15px;
+}
+
+.bookster-cpsw-form-container #bookster-cpsw-form label {
+  display: inline-block;
+  max-width: 100%;
+  margin-bottom: 5px;
+  font-size: 0.8em;
+  font-weight: normal;
+  text-transform: uppercase;
+}
+
+.bookster-cpsw-form-container #bookster-cpsw-form select {
+  width: 100%;
+  padding: 6px 12px;
+  display: block;
+  color: #555;
+  background-color: #fff;
+}
+
+.bookster-cpsw-form-container #bookster-cpsw-form .bookster-cpsw-submit {
+  width: 100%;
+  color: #fff;
+  background-color: #337ab7;
+  font-size: 1em;
+  text-align: center;
+  margin: 0;
+  padding: 10px;
+  border: none;
+}
