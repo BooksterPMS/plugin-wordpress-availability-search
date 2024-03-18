@@ -46,40 +46,6 @@ booksterCPSWDomReady(() => {
   const checkIn = form.querySelector('.js-bookster-cpsw-check-in');
   const checkOut = form.querySelector('.js-bookster-cpsw-check-out');
 
-  checkIn.addEventListener('click', () => {
-    checkIn.show();
-  });
-
-  checkOut.addEventListener('click', () => {
-    checkOut.show();
-  });
-
-  checkIn.addEventListener('duetChange', () => {
-    let checkInObj = new Date(checkIn.value),
-    checkOutObj = new Date(checkOut.value);
-
-    if(checkInObj >= checkOutObj) {
-      let newCheckInDay = checkOutObj.getDate() - 2;
-      checkInObj.setDate(newCheckInDay);
-      let month = checkInObj.getMonth() + 1;
-      if(month < 10) month = '0'+month;
-      checkIn.value = `${checkInObj.getFullYear()}-${month}-${checkInObj.getDate()}`;
-    }
-  });
-
-  checkOut.addEventListener('duetChange', () => {
-    let checkInObj = new Date(checkIn.value),
-    checkOutObj = new Date(checkOut.value);
-
-    if(checkOutObj <= checkInObj) {
-      let newCheckOutDay = checkInObj.getDate() + 2;
-      checkOutObj.setDate(newCheckOutDay);
-      let month = checkInObj.getMonth() + 1;
-      if(month < 10) month = '0'+month;
-      checkOut.value = `${checkOutObj.getFullYear()}-${month}-${checkOutObj.getDate()}`;
-    }
-  });
-
   party.addEventListener('change', () => {
     if(party.value == '--') {
       formSubmit.setAttribute('disabled', 'disabled');

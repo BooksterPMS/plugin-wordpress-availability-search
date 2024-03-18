@@ -34,9 +34,13 @@ class Bookster_CPSW
 
     add_action( 'plugins_loaded', array($this,'pluginLoaded'), 10);
 
-    add_action( 'admin_init', array( $this, 'adminInit' ), 10 );
-    add_action('admin_menu', array($this, 'adminMenu'), 9, 0);
-    add_action('admin_enqueue_scripts', array($this, 'adminEnqueueScripts'));
+    if(is_admin()) {
+      add_action( 'admin_init', array( $this, 'adminInit' ), 10 );
+      add_action('admin_menu', array($this, 'adminMenu'), 9, 0);
+      add_action('admin_enqueue_scripts', array($this, 'adminEnqueueScripts'));
+    } else {
+      add_action('wp_enqueue_scripts', array($this, 'enqueue'));
+    }
   }
 
   /**
@@ -113,10 +117,6 @@ class Bookster_CPSW
       $id = trim( $atts['sub_id'] );
   
       if($id != '') {
-        wp_enqueue_style('bookster-cpsw-duet-css', 'https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.0.1/dist/duet/themes/default.css');
-        wp_enqueue_script('bookster-cpsw-duet-js', 'https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.0.1/dist/duet/duet.js');
-        wp_enqueue_style('bookster-cpsw-form-css', plugin_dir_url( __FILE__ ) . 'includes/css/bookster-cpsw.css', array(), self::version, 'all');
-        wp_enqueue_script('bookster-cpsw-form-js', plugin_dir_url( __FILE__ ) . 'includes/js/bookster-cpsw.js', array(), self::version);
 
         $checkIn = new DateTime('now');
         $checkIn->modify('+1 day');
@@ -151,6 +151,17 @@ class Bookster_CPSW
     }
   
     return $output;
+  }
+
+  /**
+   * Enqueue frontend sttyles and scripts
+   */
+  public function enqueue()
+  {
+    wp_enqueue_style('bookster-cpsw-duet-css', plugin_dir_url( __FILE__ ) . 'includes/css/duet.css');
+    wp_enqueue_script('bookster-cpsw-duet-js', 'https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.4.0/dist/duet/duet.js');
+    wp_enqueue_style('bookster-cpsw-form-css', plugin_dir_url( __FILE__ ) . 'includes/css/bookster-cpsw.css', array(), self::version, 'all');
+    wp_enqueue_script('bookster-cpsw-form-js', plugin_dir_url( __FILE__ ) . 'includes/js/bookster-cpsw.js', array(), self::version, true);
   }
 
   /**
