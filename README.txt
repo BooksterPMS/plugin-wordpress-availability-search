@@ -8,7 +8,7 @@ Stable tag: 1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Add a Bookster Cross Property Search Widget for your Bookster Subscripotion to your posts and pages
+Add a Bookster Cross Property Search Widget for your Bookster Subscription to your posts and pages
 
 == Description ==
 
