@@ -45,6 +45,27 @@ booksterCPSWDomReady(() => {
 
   const checkIn = form.querySelector('.js-bookster-cpsw-check-in');
   const checkOut = form.querySelector('.js-bookster-cpsw-check-out');
+  let dateToCheck = null;
+
+  function dateCheck(date) {
+    if(dateToCheck == null) return false;
+
+    if('range' in dateToCheck) {
+      const from = new Date(dateToCheck.range.from);
+      const to = new Date(dateToCheck.range.to);
+      return date < from || date > to;
+    } else if ('possible' in dateToCheck) {
+      let month = date.getMonth()+1;
+      if(month < 10) month = '0'+month;
+      return !dateToCheck.possible.includes(date.getFullYear()+'-'+month+'-'+date.getDate());
+    }
+  }
+
+  checkIn.addEventListener('duetChange', (e) => {
+    dateToCheck = apiData.dates[e.detail.value];
+  });
+
+  checkOut.isDateDisabled = dateCheck;
 
   party.addEventListener('change', () => {
     if(party.value == '--') {
