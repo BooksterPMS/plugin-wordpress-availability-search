@@ -2,7 +2,7 @@
 
 /*
 Plugin Name: Bookster Cross Property Search
-Description: Add a Bookster Cross Property Search Widget for your Bookster Subscripotion to your posts and pages
+Description: Add a Bookster Cross Property Search Widget for your Bookster Subscription to your posts and pages
 Version: 1.0
 Author: Bookster
 Author URI: https://www.booksterhq.com/
