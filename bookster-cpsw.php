@@ -2,7 +2,7 @@
 
 /*
 Plugin Name: Bookster Cross Property Search
-Description: Add a Bookster Cross Property Search Widget for your Bookster Subscription to your posts and pages
+Description: Add a Bookster Cross Property Search Widget for your Bookster Subscripotion to your posts and pages
 Version: 1.0
 Author: Bookster
 Author URI: https://www.booksterhq.com/
@@ -117,6 +117,9 @@ class Bookster_CPSW
       $id = trim( $atts['sub_id'] );
   
       if($id != '') {
+        $url = 'https://booking.booksterhq.com/system/booking/date/lookup/1985/'.$id;
+        $response = file_get_contents($url);
+        $apiData = json_decode($response,true);
 
         $checkIn = new DateTime('now');
         $checkIn->modify('+1 day');
@@ -124,21 +127,22 @@ class Bookster_CPSW
         $checkOut->modify('+3 days');
 
         $output .= '<div class="bookster-cpsw-form-container">';
+        $output .= '<script> const apiData = '.$response.';</script>';
         $output .= '<form id="bookster-cpsw-form" action="">';
         $output .= '<h5>Check Availability</h5>';
         $output .= '<div class="bookster-cpsw-form-group">';
         $output .= '<label for="bookster-cpsw-check-in">Check-in</label>';
-        $output .= '<duet-date-picker value="'.$checkIn->format('Y-m-d').'" identifier="bookster-cpsw-check-in" name="bookster-cpsw-check-in" class="js-bookster-cpsw-date js-bookster-cpsw-check-in"></duet-date-picker>';
+        $output .= '<duet-date-picker min="'.$checkIn->format('Y-m-d').'" value="'.$checkIn->format('Y-m-d').'" identifier="bookster-cpsw-check-in" name="bookster-cpsw-check-in" class="js-bookster-cpsw-date js-bookster-cpsw-check-in"></duet-date-picker>';
         $output .= '</div>';
         $output .= '<div class="bookster-cpsw-form-group">';
         $output .= '<label for="bookster-cpsw-check-out">Check-out</label>';
-        $output .= '<duet-date-picker value="'.$checkOut->format('Y-m-d').'" identifier="bookster-cpsw-check-out" name="bookster-cpsw-check-out" class="js-bookster-cpsw-date js-bookster-cpsw-check-out"></duet-date-picker>';      
+        $output .= '<duet-date-picker min="'.$checkOut->format('Y-m-d').'" value="'.$checkOut->format('Y-m-d').'" identifier="bookster-cpsw-check-out" name="bookster-cpsw-check-out" class="js-bookster-cpsw-date js-bookster-cpsw-check-out"></duet-date-picker>';      
         $output .= '</div>';
         $output .= '<div class="bookster-cpsw-form-group">';
         $output .= '<label for="bookster-cpsw-party">Party size</label>';
         $output .= '<select id="bookster-cpsw-party" name="bookster-cpsw-party" class="js-bookster-cpsw-party">';
         $output .= '<option value="--">--</option>';
-        for($i=1;$i<11;$i++) {
+        for($i=1;$i<=$apiData['party']['max'];$i++) {
           $selected = ($i == 2) ? ' selected ' : '';
           $output .= '<option value="'.$i.'"'.$selected.'>'.$i.'</option>';
         }
@@ -232,7 +236,7 @@ class Bookster_CPSW
       <hr class="wp-header-end">
       <div class="notice notice-info">
         <p><strong>Important:</strong> You need a <a href="https://www.booksterhq.com/">Bookster</a> Subscription and to use your Subscription ID for this plugin to work.</p>
-        <p>You can find your Bookster Subscription ID by logging into the Bookster dashboard, and clicking on Settings. Your web browser will have an address that looks like <br>https://app.booksterhq.com/subscriptions/<strong>123456789</strong>/edit. The number between "<em>subscriptions/</em>" and "<em>/edit</em>" is your Subscription ID. Which in our example is 123456789. Please note this for example purposes only and is not an actual Subscription ID.</p>
+        <p>You can find your Bookster Subscroption ID by logging into the Bookster dashboard, and clicking on Settings. Your web browser will have an address that looks like <br>https://app.booksterhq.com/subscriptions/<strong>123456789</strong>/edit. The number between "<em>subscriptions/</em>" and "<em>/edit</em>" is your Subscription ID. Which in our example is 123456789. Please note this for example purposes only and is not an actual Subscription ID.</p>
         <?php if($option[self::option_sub_name] == ''): ?><p>Add your Subscription ID and a shortcode will appear below.</p><?php endif; ?>
         <p>Add the Bookster Cross Property search form to your posts and pages by using the shortcode. You can learn how to use WordPress shortcodes <a href="https://wordpress.com/support/wordpress-editor/blocks/shortcode-block/">here</a>.</p> 
         <p>You can copy the shortcode by clicking on it.</p>
