@@ -173,7 +173,7 @@ class Bookster_CPSW
    */
   public function adminMenu()
   {
-    add_menu_page('Bookster CPS', 'Bookster CPS', 'manage_options', 'bookster-cpsw', array($this, 'adminPage'), 'dashicons-calendar');
+    add_menu_page('Bookster Search', 'Bookster Search', 'manage_options', 'bookster-cpsw', array($this, 'adminPage'), 'dashicons-search');
   }
 
   /**
@@ -231,23 +231,23 @@ class Bookster_CPSW
     settings_errors( 'bookster_cpsw_messages' );
    ?>
     <div class="wrap" id="bookster-cpsw-settings">
-      <h1 class="wp-heading-inline">Bookster Cross Property Search</h1>
+      <h1 class="wp-heading-inline">Bookster Search</h1>
 
       <hr class="wp-header-end">
       <div class="notice notice-info">
-        <p><strong>Important:</strong> You need a <a href="https://www.booksterhq.com/">Bookster</a> Subscription and to use your Subscription ID for this plugin to work.</p>
-        <p>You can find your Bookster Subscroption ID by logging into the Bookster dashboard, and clicking on Settings. Your web browser will have an address that looks like <br>https://app.booksterhq.com/subscriptions/<strong>123456789</strong>/edit. The number between "<em>subscriptions/</em>" and "<em>/edit</em>" is your Subscription ID. Which in our example is 123456789. Please note this for example purposes only and is not an actual Subscription ID.</p>
+        <h3>Bookster</h3>
+        <p>A <a href="https://www.booksterhq.com/">Bookster</a> Subscription is <strong>required</strong>.</p>
+        <p>Find your Bookster Subscription ID by logging into Bookster and clicking on Settings. Your web browser will have an address that looks like <code>https://app.booksterhq.com/subscriptions/<strong>123456789</strong>/edit</code>.</p>
         <?php if($option[self::option_sub_name] == ''): ?><p>Add your Subscription ID and a shortcode will appear below.</p><?php endif; ?>
-        <p>Add the Bookster Cross Property search form to your posts and pages by using the shortcode. You can learn how to use WordPress shortcodes <a href="https://wordpress.com/support/wordpress-editor/blocks/shortcode-block/">here</a>.</p> 
-        <p>You can copy the shortcode by clicking on it.</p>
       </div>
+      <p>Add the Bookster Search form to your WordPress posts and pages using the Shortcode. <a href="https://wordpress.com/support/wordpress-editor/blocks/shortcode-block/">Learn how to use WordPress shortcodes</a>.</p> 
       <?php if($option[self::option_sub_name] != ''): 
         $shortcode = '[bookster_cpsw sub_id="'.$option[self::option_sub_name].'"]';
       ?>
 
       <div class="inside shortcode-container">
         <p class="description">
-          <label for="bookster-cpsw-shortcode">Copy this shortcode and paste it into your post, page, or text widget content:</label>
+          <label for="bookster-cpsw-shortcode">Copy this Shortcode and paste it into your post, page, or text widget content:</label>
           <span class="shortcode wp-ui-highlight">
             <input type="text" id="bookster-cpsw-shortcode" readonly="readonly" class="large-text code" value="<?php echo esc_attr($shortcode) ?>" />
           </span>
