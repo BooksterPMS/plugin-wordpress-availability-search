@@ -2,7 +2,7 @@
 
 /*
 Plugin Name: Bookster Cross Property Search
-Description: Add a Bookster Cross Property Search Widget for your Bookster Subscripotion to your posts and pages
+Description: Add a Bookster Cross Property Search Widget to posts or pages
 Version: 1.0
 Author: Bookster
 Author URI: https://www.booksterhq.com/
@@ -237,7 +237,7 @@ class Bookster_CPSW
       <div class="notice notice-info">
         <h3>Bookster</h3>
         <p>A <a href="https://www.booksterhq.com/">Bookster</a> Subscription is <strong>required</strong>.</p>
-        <p>Find your Bookster Subscription ID by logging into Bookster and clicking on Settings. Your web browser will have an address that looks like <code>https://app.booksterhq.com/subscriptions/<strong>123456789</strong>/edit</code>.</p>
+        <p>Find your Bookster Subscription ID by logging into Bookster and clicking on Settings. Your web browser's URL will look like <code>https://app.booksterhq.com/subscriptions/<strong>123456789</strong>/edit</code>.</p>
         <?php if($option[self::option_sub_name] == ''): ?><p>Add your Subscription ID and a shortcode will appear below.</p><?php endif; ?>
       </div>
       <p>Add the Bookster Search form to your WordPress posts and pages using the Shortcode. <a href="https://wordpress.com/support/wordpress-editor/blocks/shortcode-block/">Learn how to use WordPress shortcodes</a>.</p> 
