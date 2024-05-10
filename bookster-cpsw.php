@@ -52,14 +52,14 @@ class Bookster_CPSW
 
     add_settings_section(
       'bookster_cpsw_sub_section',
-      '',
+      'Bookster Subscription',
       array($this,'settingsSection'),
       'bookster-cpsw'
     );
 
     add_settings_field(
       self::option_sub_name,
-      'Bookster Subscription ID',
+      'Subscription ID',
       array($this, 'settingsField'),
       'bookster-cpsw',
       'bookster_cpsw_sub_section',
@@ -223,16 +223,17 @@ class Bookster_CPSW
 
     $option = get_option(self::option_name);
 
-    if ( isset( $_GET['settings-updated'] ) ) {
-      // add settings saved message with the class of "updated"
-      add_settings_error( 'bookster_cpsw_messages', 'bookster_cpsw_message', 'Subscription ID Saved', 'updated' );
-    }
+    // if ( isset( $_GET['settings-updated'] ) ) 
+    // {
+    //   // add settings saved message with the class of "updated"
+    //   add_settings_error( 'bookster_cpsw_messages', 'bookster_cpsw_message', 'Subscription ID Saved', 'updated' );
+    // }
   
     // show error/update messages
     settings_errors( 'bookster_cpsw_messages' );
    ?>
     <div class="wrap" id="bookster-cpsw-settings">
-      <h1 class="wp-heading-inline">Bookster Search</h1>
+      <h1 class="wp-heading-inline">Bookster Search Form</h1>
 
       <hr class="wp-header-end">
       <div class="notice notice-info">
@@ -255,11 +256,12 @@ class Bookster_CPSW
         </p>
       </div>
       <?php endif; ?>
+      <br /><br />
       <form action="options.php" method="post">
         <?php
         settings_fields( 'bookster_cpsw' );
         do_settings_sections( 'bookster-cpsw' );
-        submit_button( 'Save Subscription ID' );
+        submit_button( 'Save' );
         ?>
       </form>
     <?php
