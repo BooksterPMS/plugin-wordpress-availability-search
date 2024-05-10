@@ -1,7 +1,7 @@
 <?php 
 
 /*
-Plugin Name: Bookster Cross Property Search
+Plugin Name: Bookster Search Form
 Description: Add a Bookster Cross Property Search Widget to posts or pages
 Version: 1.0
 Author: Bookster
@@ -74,7 +74,7 @@ class Bookster_CPSW
    */
   public function pluginLoaded()
   {
-    add_shortcode('bookster_cpsw', array($this,'runShortcode'));
+    add_shortcode('bookster_search_form', array($this,'runShortcode'));
   }
 
   /**
@@ -101,17 +101,17 @@ class Bookster_CPSW
     //test sub id = 21265
 
     if ( is_feed() ) {
-      return '[bookster_cpsw]';
+      return '[bookster_search_form]';
     }
   
     $output = '';
 
-    if ( 'bookster_cpsw' === $code ) {
+    if ( 'bookster_search_form' === $code ) {
       $atts = shortcode_atts(
         array(
           'sub_id' => '',
         ),
-        $atts, 'bookster_cpsw'
+        $atts, 'bookster_search_form'
       );
   
       $id = trim( $atts['sub_id'] );
@@ -242,7 +242,7 @@ class Bookster_CPSW
       </div>
       <p>Add the Bookster Search form to your WordPress posts and pages using the Shortcode. <a href="https://wordpress.com/support/wordpress-editor/blocks/shortcode-block/">Learn how to use WordPress shortcodes</a>.</p> 
       <?php if($option[self::option_sub_name] != ''): 
-        $shortcode = '[bookster_cpsw sub_id="'.$option[self::option_sub_name].'"]';
+        $shortcode = '[bookster_search_form sub_id="'.$option[self::option_sub_name].'"]';
       ?>
 
       <div class="inside shortcode-container">
