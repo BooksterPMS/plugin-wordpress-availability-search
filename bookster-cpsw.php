@@ -163,8 +163,8 @@ class Bookster_CPSW
    */
   public function enqueue()
   {
-    wp_enqueue_style('bookster-cpsw-duet-css', plugin_dir_url( __FILE__ ) . 'includes/css/duet.css');
-    wp_enqueue_script('bookster-cpsw-duet-js', 'https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.4.0/dist/duet/duet.js');
+    wp_enqueue_style('bookster-cpsw-duet-css', plugin_dir_url( __FILE__ ) . 'includes/css/duet.css', array(), self::version, false);
+    wp_enqueue_script('bookster-cpsw-duet-js', 'https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.4.0/dist/duet/duet.js', array(), self::version, true);
     wp_enqueue_style('bookster-cpsw-form-css', plugin_dir_url( __FILE__ ) . 'includes/css/bookster-cpsw.css', array(), self::version, 'all');
     wp_enqueue_script('bookster-cpsw-form-js', plugin_dir_url( __FILE__ ) . 'includes/js/bookster-cpsw.js', array(), self::version, true);
   }
@@ -188,7 +188,7 @@ class Bookster_CPSW
 
     wp_enqueue_style('bookster-cpsw-admin-css', plugin_dir_url( __FILE__ ) . 'admin/css/bookster-cpsw-admin.css', array(), self::version, 'all');
 
-    wp_enqueue_script('bookster-cpsw-admin-js', plugin_dir_url( __FILE__ ) . 'admin/js/bookster-cpsw-admin.js', array(), self::version);
+    wp_enqueue_script('bookster-cpsw-admin-js', plugin_dir_url( __FILE__ ) . 'admin/js/bookster-cpsw-admin.js', array(), self::version, true);
   }
 
   /** 
@@ -207,7 +207,7 @@ class Bookster_CPSW
     $option = get_option(self::option_name);
     ?>
 
-    <input id="<?php echo esc_attr( $args['label_for'] ); ?>" name="<?php echo self::option_name ?>[<?php echo esc_attr( $args['label_for'] ); ?>]" value="<?php echo $option[$args['label_for']] ?>" />
+    <input id="<?php echo esc_attr( $args['label_for'] ); ?>" name="<?php echo esc_attr(self::option_name) ?>[<?php echo esc_attr( $args['label_for'] ); ?>]" value="<?php echo esc_attr($option[$args['label_for']]) ?>" />
 
     <?php 
   }
