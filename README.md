@@ -1,7 +1,5 @@
-# Bookster CPSW
-
-```
-Contributors: (this should be a list of wordpress.org userid's)
+=== Bookster Search Form ===
+Contributors: booksterhq
 Tags: calendar, booking, widget, bookster, search
 Requires at least: 5.3
 Requires PHP: 7.4
@@ -11,7 +9,7 @@ License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 ```
 
-Add a Bookster Cross Property Search Widget for your Bookster Subscription to your posts and pages
+Add a Bookster Property Search Form to your WordPress website
 
 ## Description
 
@@ -26,4 +24,4 @@ The form allows your site visitors to set a check-in and check-out and then perf
 1. Upload the entire `bookster-cpsw` folder to the `/wp-content/plugins/` directory.
 2. Activate the plugin through the **Plugins** screen (**Plugins > Installed Plugins**).
 
-You will find **Bookster CPSW** menu in your WordPress admin screen.
+You will find **Bookster Search** menu in your WordPress admin screen.
