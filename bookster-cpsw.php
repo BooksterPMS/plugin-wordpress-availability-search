@@ -118,8 +118,9 @@ class Bookster_CPSW
   
       if($id != '') {
         $url = 'https://booking.booksterhq.com/system/booking/date/lookup/1985/'.$id;
-        $response = file_get_contents($url);
-        $apiData = json_decode($response,true);
+        $response = wp_remote_get($url);
+        $responseBody = wp_remote_retrieve_body( $response );
+        $apiData = json_decode($responseBody,true);
 
         $checkIn = new DateTime('now');
         $checkIn->modify('+1 day');
