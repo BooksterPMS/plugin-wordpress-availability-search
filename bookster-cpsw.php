@@ -1,12 +1,15 @@
-<?php 
-
+<?php
 /*
-Plugin Name: Bookster Search Form
-Description: Add a Bookster Cross Property Search Widget to posts or pages
-Version: 1.0
-Author: Bookster
-Author URI: https://www.booksterhq.com/
-*/
+ * Plugin Name: Bookster Search Form
+ * Description: Add a Bookster Property Search Form to your WordPress website
+ * Version: 1.0
+ * Author: Bookster
+ * Author URI: https://www.booksterhq.com/
+ * Requires at least: 5.3
+ * Requires PHP: 7.4
+ * License: GPLv2 or later
+ * License URI: http://www.gnu.org/licenses/gpl-2.0.html
+ */
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
@@ -122,22 +125,39 @@ class Bookster_CPSW
         $responseBody = wp_remote_retrieve_body( $response );
         $apiData = json_decode($responseBody,true);
 
-        $checkIn = new DateTime('now');
-        $checkIn->modify('+1 day');
-        $checkOut = new DateTime('now');
-        $checkOut->modify('+3 days');
+        //
+        // Earliest Arrival Date
+        //
+        $minArrivalDate = new DateTime('now');
+        $minArrivalDate->modify('+1 day');
+        
+        if (!empty($apiData['dates']))
+        {
+          $minArrivalDate = new DateTime(array_key_first($apiData['dates']));
+        }
+
+        $strMinArrivalDate = $minArrivalDate->format('Y-m-d');
+
+        //
+        // Departure Date
+        //
+        $minDepartureDate = $minArrivalDate;
+        $minDepartureDate->modify('+2 days');
 
         $output .= '<div class="bookster-cpsw-form-container">';
         $output .= '<script> const apiData = '.$response.';</script>';
         $output .= '<form id="bookster-cpsw-form" action="">';
-        $output .= '<h5>Check Availability</h5>';
+
+        // Arrival Date Picker
         $output .= '<div class="bookster-cpsw-form-group">';
         $output .= '<label for="bookster-cpsw-check-in">Check-in</label>';
-        $output .= '<duet-date-picker min="'.$checkIn->format('Y-m-d').'" value="'.$checkIn->format('Y-m-d').'" identifier="bookster-cpsw-check-in" name="bookster-cpsw-check-in" class="js-bookster-cpsw-date js-bookster-cpsw-check-in"></duet-date-picker>';
+        $output .= '<duet-date-picker min="'.$strMinArrivalDate.'" value="'.$strMinArrivalDate.'" identifier="bookster-cpsw-check-in" name="bookster-cpsw-check-in" class="js-bookster-cpsw-date js-bookster-cpsw-check-in"></duet-date-picker>';
         $output .= '</div>';
+        
+        // Departure Date Picker
         $output .= '<div class="bookster-cpsw-form-group">';
         $output .= '<label for="bookster-cpsw-check-out">Check-out</label>';
-        $output .= '<duet-date-picker min="'.$checkOut->format('Y-m-d').'" value="'.$checkOut->format('Y-m-d').'" identifier="bookster-cpsw-check-out" name="bookster-cpsw-check-out" class="js-bookster-cpsw-date js-bookster-cpsw-check-out"></duet-date-picker>';      
+        $output .= '<duet-date-picker min="'.$minDepartureDate->format('Y-m-d').'" value="'.$minDepartureDate->format('Y-m-d').'" identifier="bookster-cpsw-check-out" name="bookster-cpsw-check-out" class="js-bookster-cpsw-date js-bookster-cpsw-check-out"></duet-date-picker>';      
         $output .= '</div>';
         $output .= '<div class="bookster-cpsw-form-group">';
         $output .= '<label for="bookster-cpsw-party">Party size</label>';
