@@ -64,6 +64,14 @@ booksterCPSWDomReady(() => {
   checkIn.addEventListener('duetChange', (e) => {
     dateToCheck = apiData.dates[e.detail.value];
     checkOut.setAttribute("min", e.detail.value);
+
+    var checkInDate = new Date(e.detail.value);
+    var checkOutDate = new Date(checkOut.value);
+
+    if (checkOutDate < checkInDate)
+    {
+      checkOut.setAttribute("value", e.detail.value);
+    }
   });
 
   checkOut.isDateDisabled = dateCheck;
