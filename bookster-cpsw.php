@@ -125,6 +125,10 @@ class Bookster_CPSW
         $responseBody = wp_remote_retrieve_body( $response );
         $apiData = json_decode($responseBody,true);
 
+        $output .= '<script>';
+        $output .= 'const apiData = '.$responseBody.';';
+        $output .= '</script>';
+
         //
         // Earliest Arrival Date
         //
@@ -142,10 +146,9 @@ class Bookster_CPSW
         // Departure Date
         //
         $minDepartureDate = $minArrivalDate;
-        $minDepartureDate->modify('+2 days');
+        $minDepartureDate->modify('+1 days');
 
         $output .= '<div class="bookster-cpsw-form-container">';
-        $output .= '<script> const apiData = '.$response.';</script>';
         $output .= '<form id="bookster-cpsw-form" action="">';
 
         // Arrival Date Picker
