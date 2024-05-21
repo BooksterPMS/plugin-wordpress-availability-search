@@ -125,9 +125,17 @@ class Bookster_CPSW
         $responseBody = wp_remote_retrieve_body( $response );
         $apiData = json_decode($responseBody,true);
 
-        $output .= '<script>';
-        $output .= 'const apiData = '.$responseBody.';';
-        $output .= '</script>';
+        // Max Party Size
+        $maxPartySize=20;
+        if (!empty($apiData['party']['max']))
+          $maxPartySize = $apiData['party']['max'];
+
+        if (!empty($responseBody))
+        {
+          $output .= '<script>';
+          $output .= 'const apiData = '.$responseBody.';';
+          $output .= '</script>';
+        }
 
         //
         // Earliest Arrival Date
@@ -166,7 +174,7 @@ class Bookster_CPSW
         $output .= '<label for="bookster-cpsw-party">Party size</label>';
         $output .= '<select id="bookster-cpsw-party" name="bookster-cpsw-party" class="js-bookster-cpsw-party">';
         $output .= '<option value="--">--</option>';
-        for($i=1;$i<=$apiData['party']['max'];$i++) {
+        for($i=1;$i<=$maxPartySize;$i++) {
           $selected = ($i == 2) ? ' selected ' : '';
           $output .= '<option value="'.$i.'"'.$selected.'>'.$i.'</option>';
         }

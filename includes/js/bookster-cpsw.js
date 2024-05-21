@@ -62,7 +62,9 @@ booksterCPSWDomReady(() => {
   }
 
   checkIn.addEventListener('duetChange', (e) => {
-    dateToCheck = apiData.dates[e.detail.value];
+    if (typeof apiData != 'undefined')
+      dateToCheck = apiData.dates[e.detail.value];
+
     checkOut.setAttribute("min", e.detail.value);
 
     var checkInDate = new Date(e.detail.value);
@@ -70,7 +72,13 @@ booksterCPSWDomReady(() => {
 
     if (checkOutDate < checkInDate)
     {
-      checkOut.setAttribute("value", e.detail.value);
+      checkOutDate.setDate(checkInDate.getDate() + 1);
+      let checkOutMonth = checkOutDate.getMonth()+1;
+      if(checkOutMonth < 10) checkOutMonth = '0'+checkOutMonth;
+      let checkOutDay = checkOutDate.getDate();
+      if(checkOutDay < 10) checkOutDay = '0'+checkOutDay;
+      var newCheckOutDate = checkOutDate.getFullYear()+'-'+checkOutMonth+'-'+checkOutDate.getDate();
+      checkOut.setAttribute("value", newCheckOutDate);
     }
   });
 
