@@ -195,7 +195,7 @@ class Bookster_CPSW
   public function enqueue()
   {
     wp_enqueue_style('bookster-cpsw-duet-css', plugin_dir_url( __FILE__ ) . 'includes/css/duet.css', array(), self::version, false);
-    wp_enqueue_script('bookster-cpsw-duet-js', 'https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.4.0/dist/duet/duet.js', array(), self::version, true);
+    wp_enqueue_script('bookster-cpsw-duet-js', plugin_dir_url( __FILE__ ) . 'includes/js/bookster-cpsw-duet.js', array(), self::version, true);
     wp_enqueue_style('bookster-cpsw-form-css', plugin_dir_url( __FILE__ ) . 'includes/css/bookster-cpsw.css', array(), self::version, 'all');
     wp_enqueue_script('bookster-cpsw-form-js', plugin_dir_url( __FILE__ ) . 'includes/js/bookster-cpsw.js', array(), self::version, true);
   }
