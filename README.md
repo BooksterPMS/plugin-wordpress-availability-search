@@ -1,6 +1,6 @@
 === Bookster Search Form ===
 Contributors: booksterhq
-Tags: calendar, booking, widget, bookster, search, rental, holiday, let
+Tags: calendar, booking, holiday, bookster, rental
 Requires at least: 5.3
 Requires PHP: 7.4
 Tested up to: 6.4
