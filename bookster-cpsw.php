@@ -132,9 +132,9 @@ class Bookster_CPSW
 
         if (!empty($responseBody))
         {
-          $output .= '<script>';
-          $output .= 'const apiData = '.$responseBody.';';
-          $output .= '</script>';
+          wp_register_script( 'dummy-inliner', '' );
+          wp_enqueue_script( 'dummy-inliner' );
+          wp_add_inline_script( 'dummy-inliner', 'const apiData = '.$responseBody.';' );
         }
 
         //
