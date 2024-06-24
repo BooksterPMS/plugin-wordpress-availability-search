@@ -16,7 +16,7 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
-class Bookster_CPSW
+class bkcpsw_Bookster_CPSW
 {
   /**
 	 * Static property to hold our singleton instance
@@ -35,7 +35,7 @@ class Bookster_CPSW
     # uninstall
     register_uninstall_hook(__FILE__, array($this,'uninstall'));
 
-    add_action( 'plugins_loaded', array($this,'pluginLoaded'), 10);
+    add_action( 'plugins_loaded', array($this,'bookster_cpsw_pluginLoaded'), 10);
 
     if(is_admin()) {
       add_action( 'admin_init', array( $this, 'adminInit' ), 10 );
@@ -75,7 +75,7 @@ class Bookster_CPSW
   /**
    * Register shortcodes
    */
-  public function pluginLoaded()
+  public function bookster_cpsw_pluginLoaded()
   {
     add_shortcode('bookster_search_form', array($this,'runShortcode'));
   }
@@ -313,4 +313,4 @@ class Bookster_CPSW
 }
 
 // Instantiate our class
-$Bookster_CPSW = Bookster_CPSW::getInstance();
+$Bookster_CPSW = bkcpsw_Bookster_CPSW::getInstance();
