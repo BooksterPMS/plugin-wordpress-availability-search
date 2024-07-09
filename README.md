@@ -1,12 +1,14 @@
-=== Bookster Search Form ===
+# Bookster Search Form
+```
 Contributors: booksterhq
 Tags: calendar, booking, holiday, bookster, rental
 Requires at least: 5.3
 Requires PHP: 7.4
 Tested up to: 6.4
-Stable tag: 1.0
+Stable Tag: v5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
+```
 
 Add a Bookster Property Search Form to your WordPress website
 

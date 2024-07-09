@@ -2,7 +2,7 @@
 /*
  * Plugin Name: Bookster Search Form
  * Description: Add a Bookster Property Search Form to your WordPress website
- * Version: v4
+ * Version: v5
  * Author: Bookster
  * Author URI: https://www.booksterhq.com/
  * Requires at least: 5.3
