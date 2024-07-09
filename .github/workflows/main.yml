@@ -1,11 +1,17 @@
 on:
   push:
     # Sequence of patterns matched against refs/tags
-    tags:  
+    tags:
       - v*
 jobs:
-  sync-to-wordpress:
+  deploy:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@master
+
       - name: WordPress Plugin SVN Deploy
         uses: nk-o/action-wordpress-plugin-deploy@v0.0.5
+        env:
+          SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
+          SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
+          SLUG: ${{ env.SLUG }}
