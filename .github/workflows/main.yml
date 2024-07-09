@@ -1,0 +1,11 @@
+on:
+  push:
+    # Sequence of patterns matched against refs/tags
+    tags:  
+      - v[0-9]+(\.[0-9]+)?
+jobs:
+  sync-to-wordpress:
+    runs-on: ubuntu-latest
+    steps:
+      - name: WordPress Plugin SVN Deploy
+        uses: nk-o/action-wordpress-plugin-deploy@v0.0.5
