@@ -4,7 +4,7 @@ Tags: calendar, booking, holiday, bookster, rental
 Requires at least: 5.3
 Requires PHP: 7.4
 Tested up to: 6.4
-Stable tag: v8
+Stable tag: v9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -17,6 +17,14 @@ This plugin allows visitors to search your holiday or rental properties by avail
 The plugin is powered by [Bookster](https://www.booksterhq.com/), Property Management Software for holiday rental owners & managers - where you can attract bookings, take care of guests and manage bookings. It connects your WordPress website to your Bookster account - you'll need to make one to use it.
 
 The widget allows visitors to set a check-in and check-out date and perform a search of the availibility directly on Bookster for all properties in your Bookster Subscription.
+
+## Screenshots
+
+1. Search Form with date pickers
+2. Responsive - will collapse down on smaller screen sizes
+3. WordPress settings screen - just enter your Bookster Subscription ID
+4. Bookster Search Engine - the form jumps you into the Bookster property listings to enable guest booking
+5. A simple search form for your holiday rentals website
 
 ## Requirements
 
