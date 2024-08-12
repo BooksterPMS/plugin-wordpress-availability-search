@@ -1,7 +1,7 @@
 .bookster-cpsw-form-container {
   box-sizing: border-box;
   padding: 1rem 1.875rem 1rem 1.875rem;
-  background: #fff;
+  background: transparent;
   margin: 10px 0;
   container-type: inline-size;
   display: flex;
