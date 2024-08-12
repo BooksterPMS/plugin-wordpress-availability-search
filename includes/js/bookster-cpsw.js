@@ -32,8 +32,10 @@ booksterCPSWDomReady(() => {
     locale: "en-GB"
   };
 
-  let form = document.querySelector('#bookster-cpsw-form'),
-  formSubmit = form.querySelector('.js-bookster-cpsw-submit'),
+  form = document.querySelector('#bookster-cpsw-form');
+
+  // form = document.querySelector('#bookster-cpsw-form'),
+  let formSubmit = form.querySelector('.js-bookster-cpsw-submit'),
   dataPickers = form.querySelectorAll('.js-bookster-cpsw-date'),
   party = form.querySelector('.js-bookster-cpsw-party'),
   subID = form.querySelector('.js-bookster-cpsw-subId');
@@ -48,13 +50,21 @@ booksterCPSWDomReady(() => {
   let dateToCheck = null;
 
   function dateCheck(date) {
-    if(dateToCheck == null) return false;
+    if(dateToCheck == null) return true;
 
-    if('range' in dateToCheck) {
-      const from = new Date(dateToCheck.range.from);
-      const to = new Date(dateToCheck.range.to);
-      return date < from || date > to;
-    } else if ('possible' in dateToCheck) {
+    if('range' in dateToCheck)
+    {
+      const from = new Date(dateToCheck.range.from+' 00:00:00');
+      const to = new Date(dateToCheck.range.to+' 00:00:00');
+      if (date.getTime() >= from.getTime() && date.getTime() <= to.getTime())
+      {
+        return false;
+      }
+      else
+        return true;
+    }
+    else if ('possible' in dateToCheck) 
+    {
       let month = date.getMonth()+1;
       if(month < 10) month = '0'+month;
       return !dateToCheck.possible.includes(date.getFullYear()+'-'+month+'-'+date.getDate());
