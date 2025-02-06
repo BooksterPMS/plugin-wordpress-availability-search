@@ -3,8 +3,8 @@ Contributors: booksterhq
 Tags: calendar, booking, holiday, bookster, rental
 Requires at least: 5.3
 Requires PHP: 7.4
-Tested up to: 6.4
-Stable tag: v14
+Tested up to: 6.7
+Stable tag: v15
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
