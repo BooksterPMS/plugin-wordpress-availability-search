@@ -1,5 +1,5 @@
 let booksterCPSWDomReady = function(callback) {
-     document.readyState === "interactive" || document.readyState === "complete" ? callback() : document.addEventListener("DOMContentLoaded", callback);
+  document.readyState === "interactive" || document.readyState === "complete" ? callback() : document.addEventListener("DOMContentLoaded", callback);
 };
 
 booksterCPSWDomReady(() => {
@@ -48,36 +48,19 @@ booksterCPSWDomReady(() => {
   const checkOut = form.querySelector('.js-bookster-cpsw-check-out');
   let dateToCheck = null;
 
-  //================================================
-  // CORRECTED FUNCTION
-  //================================================
-  /**
-   * Disables dates in the check-in picker that are not available in apiData.dates.
-   * This function is called by the date picker for every date shown in the calendar.
-   * @param {Date} date The date object to check.
-   * @returns {boolean} Returns true to DISABLE the date, false to ENABLE it.
-   */
   const isCheckInDateDisabled = (date) => {
-    // Ensure apiData.dates exists and is an object. If not, enable all dates by default.
     if (typeof apiData === 'undefined' || typeof apiData.dates !== 'object' || apiData.dates === null) {
       return false;
     }
-
-    // Convert the date object to 'YYYY-MM-DD' format for comparison.
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, '0');
     const day = String(date.getDate()).padStart(2, '0');
     const formattedDate = `${year}-${month}-${day}`;
-    
-    // Get an array of all valid check-in dates from the object keys.
     const allowedDates = Object.keys(apiData.dates);
-
-    // Disable the date if it's NOT in our list of allowed dates (the keys).
     return !allowedDates.includes(formattedDate);
   };
 
   checkIn.isDateDisabled = isCheckInDateDisabled;
-
 
   function dateCheck(date) {
     if (dateToCheck == null) return true;
@@ -85,21 +68,25 @@ booksterCPSWDomReady(() => {
     if ('range' in dateToCheck) {
       const from = new Date(dateToCheck.range.from + ' 00:00:00');
       const to = new Date(dateToCheck.range.to + ' 00:00:00');
-      if (date.getTime() >= from.getTime() && date.getTime() <= to.getTime()) {
-        return false;
-      } else
-        return true;
+      // The logic here is reversed: return false (enable) if in range.
+      return !(date.getTime() >= from.getTime() && date.getTime() <= to.getTime());
     } else if ('possible' in dateToCheck) {
-      let month = date.getMonth() + 1;
-      if (month < 10) month = '0' + month;
-      return !dateToCheck.possible.includes(date.getFullYear() + '-' + month + '-' + date.getDate());
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const day = String(date.getDate()).padStart(2, '0');
+      const formattedDate = `${year}-${month}-${day}`;
+      return !dateToCheck.possible.includes(formattedDate);
     }
+    // Add a default return for safety
+    return true;
   }
 
   checkIn.addEventListener('duetChange', (e) => {
-    // This part of your code was already correct for handling the check-out picker
-    if (typeof apiData != 'undefined' && apiData.dates[e.detail.value])
-      dateToCheck = apiData.dates[e.detail.value];
+    if (typeof apiData != 'undefined' && apiData.dates[e.detail.value]) {
+       dateToCheck = apiData.dates[e.detail.value];
+    } else {
+       dateToCheck = null; // Reset if the check-in date is invalid
+    }
 
     checkOut.setAttribute("min", e.detail.value);
 
@@ -108,11 +95,11 @@ booksterCPSWDomReady(() => {
 
     if (checkOutDate < checkInDate) {
       checkOutDate.setDate(checkInDate.getDate() + 1);
-      let checkOutMonth = checkOutDate.getMonth() + 1;
-      if (checkOutMonth < 10) checkOutMonth = '0' + checkOutMonth;
-      let checkOutDay = checkOutDate.getDate();
-      if (checkOutDay < 10) checkOutDay = '0' + checkOutDay;
-      var newCheckOutDate = checkOutDate.getFullYear() + '-' + checkOutMonth + '-' + checkOutDate.getDate();
+      
+      const checkOutMonth = String(checkOutDate.getMonth() + 1).padStart(2, '0');
+      const checkOutDay = String(checkOutDate.getDate()).padStart(2, '0');
+      const newCheckOutDate = `${checkOutDate.getFullYear()}-${checkOutMonth}-${checkOutDay}`;
+      
       checkOut.setAttribute("value", newCheckOutDate);
     }
   });
